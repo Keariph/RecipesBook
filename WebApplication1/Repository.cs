@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-
-
 namespace WebApplication1
 {
     public class Repository : DbContext
@@ -19,49 +17,49 @@ namespace WebApplication1
 
         public void Create(Model model)
         {
-            using(Repository rp = new Repository())
+            using(Repository repository = new Repository())
             {
-                rp.Models.Add(model);
-                rp.SaveChanges();
+                repository.Models.Add(model);
+                repository.SaveChanges();
             }
         }
 
         public List<Model> ReadAll()
         {
-            using(Repository rp = new Repository())
+            using(Repository repository = new Repository())
             {
-                return rp.Models.ToList();
+                return repository.Models.ToList();
             }
         }
 
         public Model ReadOne(int id)
         {
-            using (Repository rp = new Repository())
+            using (Repository repository = new Repository())
             {
-                Model model = rp.Models.Find(id);
+                Model model = repository.Models.Find(id);
                 return model;
-
             }
         }
 
         public void Update(Model model)
         {
-            using(Repository rp = new Repository())
+            using(Repository repository = new Repository())
             {
-                rp.Models.Update(model);
-                rp.SaveChanges();
+                repository.Models.Update(model);
+                repository.SaveChanges();
             }
         }
 
         public void Delete(int id)
         {
-            using(Repository rp = new Repository())
+            using(Repository repository = new Repository())
             {
-                Model model = rp.Models.Find(id);
+                Model model = repository.Models.Find(id);
+
                 if (model != null)
                 {
-                    rp.Models.Remove(model); 
-                    rp.SaveChanges();
+                    repository.Models.Remove(model); 
+                    repository.SaveChanges();
                 }
             }
         }
