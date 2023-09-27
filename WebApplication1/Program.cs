@@ -14,18 +14,6 @@ namespace WebApplication1
             app.MapGet("/", () => "Hello World!");
 
             app.Run();*/
-
-            /*Model a = new Model(1, "A");
-            Model b = new Model(2, "b");*/
-
-            Repository rp = new Repository();
-            var models = rp.Read();
-            Console.WriteLine("Список объектов:");
-            foreach (Model m in models)
-            {
-                Console.WriteLine($"{m.Id}.{m.Name}");
-            }
-
         }
     }
 }

@@ -12,5 +12,15 @@ namespace WebApplication1
             Id = id;
             Name = name;
         }
+
+        public void SetId(int id) 
+        { 
+            Id = id; 
+        }
+
+        public void SetName(string name)
+        {
+            Name = name;
+        }
     }
 }

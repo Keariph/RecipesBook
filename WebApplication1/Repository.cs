@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Extensions.Configuration;
+
+
 
 namespace WebApplication1
 {
@@ -7,11 +9,12 @@ namespace WebApplication1
     {
         public DbSet<Model> Models => Set<Model>();
         public Repository() => Database.EnsureCreated();
+        //StreamWriter logStream = new StreamWriter("mylog.txt", false);
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=models;Username=postgres;Password=1313");
-            optionsBuilder.LogTo(Console.WriteLine, LogLevel.Information);
+            //optionsBuilder.LogTo(Console.WriteLine);
         }
 
         public void Create(Model model)
@@ -23,7 +26,7 @@ namespace WebApplication1
             }
         }
 
-        public List<Model> Read()
+        public List<Model> ReadAll()
         {
             using(Repository rp = new Repository())
             {
@@ -31,6 +34,36 @@ namespace WebApplication1
             }
         }
 
+        public Model ReadOne(int id)
+        {
+            using (Repository rp = new Repository())
+            {
+                Model model = rp.Models.Find(id);
+                return model;
 
+            }
+        }
+
+        public void Update(Model model)
+        {
+            using(Repository rp = new Repository())
+            {
+                rp.Models.Update(model);
+                rp.SaveChanges();
+            }
+        }
+
+        public void Delete(int id)
+        {
+            using(Repository rp = new Repository())
+            {
+                Model model = rp.Models.Find(id);
+                if (model != null)
+                {
+                    rp.Models.Remove(model); 
+                    rp.SaveChanges();
+                }
+            }
+        }
     }
 }
