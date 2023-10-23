@@ -1,64 +1,65 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace WebApplication1
+namespace RecipesBook
 {
     public class Repository : DbContext
     {
-        public DbSet<Model> Models => Set<Model>();
+        public DbSet<Recipe> Recipes => Set<Recipe>();
         public Repository() => Database.EnsureCreated();
         //StreamWriter logStream = new StreamWriter("mylog.txt", false);
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=models;Username=postgres;Password=1313");
+            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=recipes;Username=postgres;Password=1313");
             //optionsBuilder.LogTo(Console.WriteLine);
         }
 
-        public void Create(Model model)
+        public void Create(Recipe model)
         {
             using(Repository repository = new Repository())
             {
-                repository.Models.Add(model);
+                repository.Recipes.Add(model);
                 repository.SaveChanges();
             }
         }
 
-        public List<Model> ReadAll()
+        public List<Recipe> ReadAll()
         {
             using(Repository repository = new Repository())
             {
-                return repository.Models.ToList();
+                return repository.Recipes.ToList();
             }
         }
 
-        public Model ReadOne(int id)
+        public Recipe ReadOne(/*string id*/)
         {
             using (Repository repository = new Repository())
             {
-                Model model = repository.Models.Find(id);
+                //Recipe model = repository.Recipes.Find(id);
+                Recipe model = repository.Recipes.First();
                 return model;
             }
         }
 
-        public void Update(Model model)
+        public void Update(Recipe model)
         {
             using(Repository repository = new Repository())
             {
-                repository.Models.Update(model);
+                repository.Recipes.Update(model);
                 repository.SaveChanges();
             }
         }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
             using(Repository repository = new Repository())
             {
-                Model model = repository.Models.Find(id);
+                Recipe model = repository.Recipes.Find(id);
 
                 if (model != null)
                 {
-                    repository.Models.Remove(model); 
+                    repository.Recipes.Remove(model); 
                     repository.SaveChanges();
                 }
             }
