@@ -7,12 +7,10 @@ namespace RecipesBook
     {
         public DbSet<Recipe> Recipes => Set<Recipe>();
         public Repository() => Database.EnsureCreated();
-        //StreamWriter logStream = new StreamWriter("mylog.txt", false);
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=recipes;Username=postgres;Password=1313");
-            //optionsBuilder.LogTo(Console.WriteLine);
         }
 
         public void Create(Recipe model)
@@ -32,12 +30,11 @@ namespace RecipesBook
             }
         }
 
-        public Recipe ReadOne(/*string id*/)
+        public Recipe ReadOne(string id)
         {
             using (Repository repository = new Repository())
             {
-                //Recipe model = repository.Recipes.Find(id);
-                Recipe model = repository.Recipes.First();
+                Recipe model = repository.Recipes.Find(id);
                 return model;
             }
         }
