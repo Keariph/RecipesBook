@@ -4,22 +4,22 @@ using System.Text.Json;
 namespace RecipesBook
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("/api")]
     public class Controller : ControllerBase
     {
         Repository Repository = new Repository();
 
-        [Route("/")]
-        public ActionResult GetRecipes() 
+        [HttpGet("/")]
+        public ActionResult GetAllRecipes() 
         {
+            Response.ContentType = "application/json";
             List<Recipe> recipes = Repository.ReadAll();
             string response = JsonSerializer.Serialize(recipes);
             return response == null ? NotFound() : Ok(response);
         }
 
-        [HttpGet]
-        [Route("/main/recipe/{id}")]
-        public ActionResult PostRecipes([FromHeader] string id) 
+        [HttpGet("/recipe/{id}")]
+        public ActionResult GetRecipe([FromRoute] string id) 
         {
             Recipe recipe = Repository.ReadOne(id);
             string response = JsonSerializer.Serialize(recipe);
