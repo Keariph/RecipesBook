@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Net;
 
-namespace RecipesBook
+namespace RecipesBook.Models
 {
     [Serializable]
     public class Recipe

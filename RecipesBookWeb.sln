@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipesBookWeb.Server", "RecipesBookWeb.Server\RecipesBookWeb.Server.csproj", "{DA1C93A5-0ADA-447A-ADFC-A5CC00C43214}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "recipesbookweb.client", "recipesbookweb.client\recipesbookweb.client.esproj", "{4E526617-7701-4443-BBBD-EFED3748BC7D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DA1C93A5-0ADA-447A-ADFC-A5CC00C43214}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA1C93A5-0ADA-447A-ADFC-A5CC00C43214}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA1C93A5-0ADA-447A-ADFC-A5CC00C43214}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA1C93A5-0ADA-447A-ADFC-A5CC00C43214}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E526617-7701-4443-BBBD-EFED3748BC7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E526617-7701-4443-BBBD-EFED3748BC7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E526617-7701-4443-BBBD-EFED3748BC7D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{4E526617-7701-4443-BBBD-EFED3748BC7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E526617-7701-4443-BBBD-EFED3748BC7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E526617-7701-4443-BBBD-EFED3748BC7D}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {090B13F9-0EED-4BCE-B819-D4396758F6F0}
+	EndGlobalSection
+EndGlobal
