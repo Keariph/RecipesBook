@@ -1,6 +1,0 @@
-@RecipesBookWeb.Server_HostAddress = http://localhost:5168
-
-GET {{RecipesBookWeb.Server_HostAddress}}/recipe/
-Accept: application/json
-
-###

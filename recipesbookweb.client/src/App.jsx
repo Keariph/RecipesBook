@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import { Recipe } from './Recipe';
 
 function App() {
     const [recipes, setRecipes] = useState([]);
@@ -26,35 +27,22 @@ function App() {
                 </em>
             </p>
         );
+
     }
+
 
     return (
         <div>
-            <h1 id="tabelLabel">All recipes</h1>           
-            <table className="table table-striped" aria-labelledby="tabelLabel">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Cooking time</th>
-                        <th>Calories</th>
-                        <th>Number of servings</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {recipes.map((recipe, index) =>
-                        <tr key={index}>
-                            <td>{recipe.title}</td>
-                            <td>{recipe.cookingTime}</td>
-                            <td>{recipe.calories}</td>
-                            <td>{recipe.numberOfServings}</td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
+            <h1 id="Title">All recipes</h1>
+            <div>
+                {recipes.map((recipe, index) => (
+                    <Recipe recipe={recipe} key={index} />
+                ))}
+            </div>
         </div>
     );
-    
-    
+
+
 }
 
 
