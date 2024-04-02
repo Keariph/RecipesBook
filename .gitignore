@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /WebApplication1/Migrations
 /RecipesBookWeb.Server/appsettings.json
+/RecipesBookWeb.Server/Migrations
