@@ -82,7 +82,7 @@ namespace RecipesBookWeb.Server.Controllers
         /// <param name="model">The recipe model to create.</param>
         /// <returns>A 200 OK response if the recipe is successfully created, or a 400 Bad Request response if the model is invalid.</returns>
         [HttpPost]
-        private IActionResult Create([FromBody] Recipe model)
+        public IActionResult Create([FromBody] Recipe model)
         {
             var context = new ValidationContext(model);
             var result = new List<ValidationResult>();
@@ -105,7 +105,7 @@ namespace RecipesBookWeb.Server.Controllers
         /// <param name="model">The recipe model to update.</param>
         /// <returns>A 200 OK response if the recipe is successfully updated, or a 400 Bad Request response if the model is invalid.</returns>
         [HttpPost]
-        private IActionResult Update([FromBody] Recipe model)
+        public IActionResult Update([FromBody] Recipe model)
         {
             var context = new ValidationContext(model);
             var result = new List<ValidationResult>();
@@ -126,7 +126,7 @@ namespace RecipesBookWeb.Server.Controllers
         /// </summary>
         /// <param name="id">The ID of the recipe to delete.</param>
         [HttpDelete]
-        private void Delete([FromRoute] string id)
+        public void Delete([FromRoute] string id)
         {
             Recipe model = _context.Recipes.Find(id);
 
