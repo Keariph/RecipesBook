@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RecipesBook.Models;
-using RecipesBook.Repositories;
+using RecipesBookWeb.Server.Models;
+using RecipesBook.Server.Repositories;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
 
@@ -15,12 +15,22 @@ namespace RecipesBookWeb.Server.Controllers
     public class ApiController : Controller
     {
         private readonly RecipeContext _context;
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="take"></param>
+        /// <param name="skip"></param>
+        /// <returns></returns>
         private List<Recipe> ReadRecipes(int take = 10, int skip = 0)
         {
             return _context.Recipes.Skip(skip).Take(take).ToList();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private Recipe ReadOne(string id)
         {
             Recipe model = _context.Recipes.Find(id);
@@ -59,20 +69,6 @@ namespace RecipesBookWeb.Server.Controllers
             Response.ContentType = "application/json";
             Recipe recipe = ReadOne(id);
             string response = JsonSerializer.Serialize(recipe);
-            return response == null ? NotFound() : Ok(response);
-        }
-
-        /// <summary>
-        /// Filters recipes based on a query parameter.
-        /// </summary>
-        /// <param name="filter">The filter query parameter.</param>
-        /// <returns>A list of filtered recipes or a 404 Not Found response if no recipes match the filter.</returns>
-        [HttpGet]
-        public IActionResult Filter([FromQuery] string filter, int take = 10, int skip = 0)
-        {
-            Response.ContentType = "application/json";
-            List<Recipe> recipes = ReadRecipes(take, skip);
-            string response = JsonSerializer.Serialize(recipes);
             return response == null ? NotFound() : Ok(response);
         }
 
@@ -135,6 +131,50 @@ namespace RecipesBookWeb.Server.Controllers
                 _context.Recipes.Remove(model);
                 _context.SaveChanges();
             }
+        }
+
+        /// <summary>
+        /// Filters recipes based on a query parameter.
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="maxCookingTime"></param>
+        /// <param name="maxCalories"></param>
+        /// <param name="maxNumberOfServings"></param>
+        /// <param name="minCookingTime"></param>
+        /// <param name="minCalories"></param>
+        /// <param name="minNumberOfServings"></param>
+        /// <param name="minRating"></param>
+        /// <param name="maxRating"></param>
+        /// <param name="take"></param>
+        /// <param name="skip"></param>
+        /// <returns>A list of filtered recipes or a 404 Not Found response if no recipes match the filter.</returns>
+        [HttpPost]
+        public IActionResult Filter([FromQuery] int? maxCookingTime, int? maxCalories,  int? maxNumberOfServings, string? title = "", int minCookingTime = 0, int minCalories = 0, int minNumberOfServings = 0, float minRating = 0f, float maxRating = 5f, int take = 10, int skip = 0)
+        {
+            if(maxCookingTime == null)
+            {
+                maxCookingTime = _context.Recipes.Select(recipe => recipe.CookingTime).Max();
+            }
+            if(maxCalories == null)
+            {
+                maxCalories = _context.Recipes.Select(recipe => recipe.Calories).Max();
+            }
+            if(maxNumberOfServings == null)
+            {
+                maxNumberOfServings = _context.Recipes.Select(recipe => recipe.NumberOfServings).Max();
+            }
+
+            Response.ContentType = "application/json";
+            List<Recipe> response = _context.Recipes.Where(recipe => recipe.Title == title
+                                                                     && recipe.CookingTime > minCookingTime
+                                                                     && recipe.CookingTime < maxCookingTime
+                                                                     && recipe.Calories > minCalories
+                                                                     && recipe.Calories < maxCalories
+                                                                     && recipe.NumberOfServings > minNumberOfServings
+                                                                     && recipe.NumberOfServings < maxCalories
+                                                                     && recipe.Rating > minRating 
+                                                                     && recipe.Rating < maxRating).Skip(skip).Take(take).ToList();
+            return response == null ? NotFound() : Ok(response);
         }
     }
 }

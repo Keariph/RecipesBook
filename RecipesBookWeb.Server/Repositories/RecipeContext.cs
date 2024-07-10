@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using RecipesBook.Models;
+using RecipesBookWeb.Server.Models;
 using System.Collections.Generic;
 
-namespace RecipesBook.Repositories
+namespace RecipesBook.Server.Repositories
 {
     /// <summary>
     /// Represents a session with the database for managing recipes.
@@ -26,5 +26,10 @@ namespace RecipesBook.Repositories
         /// Gets or sets the <see cref="DbSet{Recipe}"/> that can be used to query and save instances of <see cref="Recipe"/>.
         /// </summary>
         public DbSet<Recipe> Recipes => Set<Recipe>();
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.HasDefaultSchema("Recipes");
+        }
     }
 }

@@ -3,13 +3,13 @@ using RecipesBookWeb.Server.Models;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
 
-namespace RecipesBook.Models
+namespace RecipesBookWeb.Server.Models
 {
     /// <summary>
-    /// Represents a recipe with details such as ingredients, instructions, and preparation time.
+    /// Represents a recipe with details such as ingredients, instructions, preparation time and etc.
     /// </summary>
     /// <remarks>
-    /// This class is used to model a recipe in a cooking application. It includes properties for the recipe's name, ingredients, instructions, and preparation time.
+    /// This class is used to model a recipe in a cooking application. It includes properties for the recipe's name, ingredients, instructions,preparation time and etc.
     /// </remarks>
     [Serializable]
     public class Recipe
@@ -115,9 +115,9 @@ namespace RecipesBook.Models
         /// Gets or sets the rating for the recipe.
         /// </summary>
         /// <remarks>
-        /// The rating must be a minimum range of 0 and a maximum range of 10.
+        /// The rating must be a minimum range of 0 and a maximum range of 5.
         /// </remarks>
-        [Range(0.0, 10.0)]
+        [Range(0.0, 5.0)]
         public float Rating { get; set; }
 
         /// <summary>
